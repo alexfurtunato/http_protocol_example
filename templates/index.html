@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Idade - Demonstração HTTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .section h2 {
+            color: #555;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .get-button {
+            background-color: #28a745;
+        }
+        .get-button:hover {
+            background-color: #1e7e34;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .method-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .post-method {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .get-method {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+        #pessoas-lista {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Demonstração de Comandos HTTP</h1>
+        <p>Este projeto demonstra o uso dos métodos HTTP GET e POST em uma aplicação Flask.</p>
+
+        <div class="section">
+            <h2><span class="method-tag get-method">GET</span>Listar Pessoas</h2>
+            <p>Clique no botão abaixo para fazer uma requisição GET e obter a lista de pessoas fictícias:</p>
+            <button type="button" class="get-button" onclick="listarPessoas()">Listar Pessoas (GET)</button>
+            <div id="pessoas-lista"></div>
+        </div>
+
+        <div class="section">
+            <h2><span class="method-tag post-method">POST</span>Calcular Idade</h2>
+            <p>Preencha o formulário abaixo para calcular sua idade (requisição POST):</p>
+            
+            {% if erro %}
+                <div class="error">{{ erro }}</div>
+            {% endif %}
+            
+            <form action="/calcular-idade" method="POST">
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="date" id="data_nascimento" name="data_nascimento" required>
+                <button type="submit">Calcular Idade (POST)</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function listarPessoas() {
+            fetch('/pessoas')
+                .then(response => response.json())
+                .then(data => {
+                    const lista = document.getElementById('pessoas-lista');
+                    lista.innerHTML = '<h3>Lista de Pessoas:</h3>';
+                    const ul = document.createElement('ul');
+                    data.forEach(pessoa => {
+                        const li = document.createElement('li');
+                        li.textContent = `${pessoa.nome} - ${pessoa.data_nascimento}`;
+                        ul.appendChild(li);
+                    });
+                    lista.appendChild(ul);
+                    lista.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao carregar dados');
+                });
+        }
+    </script>
+</body>
+</html>

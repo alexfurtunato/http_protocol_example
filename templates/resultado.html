@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado - Calculadora de Idade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .resultado {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .idade {
+            font-size: 2em;
+            color: #155724;
+            font-weight: bold;
+        }
+        .data {
+            color: #666;
+            margin-top: 10px;
+        }
+        .voltar {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .voltar:hover {
+            background-color: #545b62;
+            text-decoration: none;
+            color: white;
+        }
+        .method-info {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado da Calculadora de Idade</h1>
+        
+        <div class="method-info">
+            <strong>Método HTTP utilizado:</strong> POST<br>
+            <small>Os dados foram enviados via formulário usando o método POST</small>
+        </div>
+        
+        <div class="resultado">
+            <div class="idade">{{ idade }} anos</div>
+            <div class="data">Data de nascimento: {{ data_nascimento }}</div>
+        </div>
+        
+        <a href="/" class="voltar">← Voltar ao início</a>
+    </div>
+</body>
+</html>
