@@ -33,5 +33,10 @@ def calcular_idade():
     except ValueError:
         return render_template('index.html', erro="Data inválida. Use o formato AAAA-MM-DD")
 
+@app.route('/teste500', methods=['GET'])
+def forcar_erro():
+    # Forçando um erro 500 para teste
+    return pessoas_ficticias[100]
+
 if __name__ == '__main__':
     app.run(debug=True)
